@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Richiedi un Preventivo - QuiPolizze</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      padding: 2rem;
+      max-width: 700px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #1a1a1a;
+    }
+    form {
+      background-color: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .note {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Richiedi un Preventivo Personalizzato</h2>
+  <form id="preventivoForm">
+    <label for="nome">Nome e Cognome</label>
+    <input type="text" id="nome" name="nome" required>
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required>
+
+    <label for="telefono">Numero di Telefono</label>
+    <input type="tel" id="telefono" name="telefono" required>
+
+    <label for="tipo">Tipo di Assicurazione Richiesta</label>
+    <select id="tipo" name="tipo">
+      <option value="RC Auto">RC Auto</option>
+      <option value="Casa">Casa</option>
+      <option value="Vita">Vita</option>
+      <option value="Infortuni">Infortuni</option>
+      <option value="Viaggi">Viaggi</option>
+      <option value="Professionale">Professionale</option>
+      <option value="Noleggio">Noleggio</option>
+      <option value="Altro">Altro</option>
+    </select>
+
+    <label for="note">Note Aggiuntive / Esigenze Particolari</label>
+    <textarea id="note" name="note" rows="4"></textarea>
+
+    <button type="submit">Invia la Richiesta</button>
+  </form>
+
+  <p class="note">
+    Tutte le richieste verranno gestite con la massima professionalità e rapidità. Riceverai una risposta via email da: <strong>gestimmevo81.assicurazioni@gmail.com</strong>. Potresti inoltre essere contattato telefonicamente per una consulenza diretta con un nostro esperto.
+  </p>
+
+  <script>
+    document.getElementById('preventivoForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const dati = {
+        nome: document.getElementById('nome').value,
+        email: document.getElementById('email').value,
+        telefono: document.getElementById('telefono').value,
+        tipo: document.getElementById('tipo').value,
+        note: document.getElementById('note').value
+      };
+
+      fetch('https://formsubmit.co/ajax/gestimmevo81.assicurazioni@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(dati)
+      })
+      .then(response => response.json())
+      .then(data => {
+        alert('Richiesta inviata con successo! Verrai ricontattato al più presto.');
+        document.getElementById('preventivoForm').reset();
+      })
+      .catch(error => {
+        alert('Si è verificato un errore nell’invio. Riprova più tardi.');
+      });
+    });
+  </script>
+</body>
+</html>
